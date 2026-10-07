@@ -1,0 +1,65 @@
+.main-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    border: 2px solid black;
+    padding: 20px;
+    
+}
+
+
+.nav-logo img{
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+}
+
+.nav-items ul{
+    display: flex;
+    gap: 20px;
+
+}
+
+.nav-items ul li{
+    list-style: none;
+}
+
+
+
+
+/*  main-container */
+.main-container{
+    margin: 20px;
+  
+
+    
+
+}
+
+
+.res-img img{
+    width: 250px;
+    height: 150px;
+    border-radius: 10px;
+}
+
+.res-card{
+
+    border: 2px solid black;
+    width: 250px;
+    height: 280px;
+    border-radius: 10px;
+
+}
+
+.res-container{
+    margin: 10px;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-wrap: wrap;
+gap: 10px;
+
+}
+
