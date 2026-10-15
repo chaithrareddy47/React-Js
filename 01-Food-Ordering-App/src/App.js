@@ -1,6 +1,8 @@
 
 import React from "react";
 import ReactDOM from "react-dom/client";
+import Header from "./components/Header";
+  
 
 
 
@@ -125,23 +127,7 @@ const resList = [
   },
 ];
 
-const Header = () => {
-  return (
-    <div className="header">
-      <div className="logo">
-        <h1>Logo</h1>
-      </div>
-      <div className="nav-items">
-        <ul>
-          <li>Home</li>
-          <li>About</li>
-          <li>Cart</li>
-        </ul>
-      </div>
 
-    </div>
-  )
-}
 
 
 
@@ -166,12 +152,12 @@ const Body = () => {
 const Restaurant = ({resData}) => {
   console.log(resData);
   
-  const { name, avgRating, areaName } = resData;
+  const { name, avgRating, areaName, cloudinaryImageId } = resData;
   
   return (
     <div className="res-card">
       <img
-        src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/RX_THUMBNAIL/IMAGES/VENDOR/2026/9/7/471f6df4-6fa8-464c-a583-d4f5468f3c9f_173815.JPG"
+        src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/`+cloudinaryImageId}
         alt=""
       />
       <h1>{name}</h1>
