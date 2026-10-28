@@ -1,14 +1,13 @@
+import ProduceCard from "./ProduceCard"
 
-import UserProfile from "./components/UserProfile"
-import ProductList from "./components/ProductList"
 
 
 const App = () => {
+   
   return (
     <div>
       <h1>PROPS PRACTICE</h1>
-      <UserProfile />
-      <ProductList/>
+      <ProduceCard/>
     </div>
   )
 }

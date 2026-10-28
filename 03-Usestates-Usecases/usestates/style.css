@@ -1,0 +1,36 @@
+.container{
+    border: 2px solid black;
+    width: 150px;
+    height: 100px;
+   background-color: #1C1B20;
+  border-radius: 10px;
+  margin: 0 auto;
+
+}
+h1{
+    color: #a794fd;
+    margin: 0;
+}
+.con{
+
+    display: flex;
+    
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+button{
+    border: none;
+    width: 50px;
+    border-radius: 10px;
+    margin: 10px;
+    cursor: pointer;
+}
+.inc{
+    background-color: #F2B8B6;
+    color: #68251D;
+}
+.dec{
+    background-color: #4DAF50;
+    color: white;
+}
