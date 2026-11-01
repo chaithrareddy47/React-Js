@@ -1,19 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const Header = () => {
-  return (
-    <div className="header">
-      <div className="logo">
-        <h1>Logo</h1>
-      </div>
-      <div className="nav-items">
-        <ul>
-          <li>Home</li>
-          <li>About</li>
-          <li>Cart</li>
-        </ul>
-      </div>
+  const [logInBtn, setLogInBtn] = useState("Logout")
 
+  const handleLoginBtn = () => {
+    setLogInBtn((prev) => (
+      prev === "Login" ? "Logout" : "Login"
+    ))
+  }
+  return (
+    <div className='nav'>
+          <div className='logo'>
+              <h1>LOGO</h1>
+          </div>
+          <div className='nav-list'>
+              <ul>
+                  <li>Home</li>
+                  <li>About</li>
+                  <li>Contact us</li>
+          <li>Cart</li>
+          <button onClick={handleLoginBtn}>
+            {logInBtn}
+          </button>
+              </ul>
+          </div>
     </div>
   )
 }

@@ -1,56 +1,94 @@
+import React, { useEffect, useState } from 'react'
+import RestaurantCard from './RestaurantCard';
 
-import RestaurantCrad from './RestaurantCrad'
-import { resList } from '../utils/mockData'
-import { useState , useEffect} from 'react';
+import { SWIGGI_API } from '../constants/mockData';
+import ShimmerUi from './ShimmerUi';
 
 
 const Body = () => {
-  const [restaurantList, setRestaurantList] = useState([])
-
+  const shimmerArray = Array.from({length:10})
   console.log("body rendered");
 
-  useEffect(() => {
-    console.log("useeffect called");
-    fetchData();
-    
-  })
-  const fetchData = async () => {
-    const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.778963&lng=77.7702029&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING")
+  const [allResto,setAllRestro] = useState([])
+  const [listOfRestro,setListOfRestro] = useState([])
 
-    const json = await data.json();
-    console.log(
-      json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
-    );
-  setRestaurantList(
-    json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants,
-  );
-    
+  const [value,setValue] = useState("")
+  
+  useEffect(() => {
+    fetchData()
+  }, [])
+  
+  const fetchData = async () => {
+    const data = await fetch(SWIGGI_API)
+    const response = await data.json()
+    // console.log(response);
+
+
+   const findResData = response.data.cards.find(
+     (data) =>
+       data.card.card?.gridElements?.infoWithStyle["@type"] ===
+       "type.googleapis.com/swiggy.seo.widgets.v1.FoodRestaurantGridListingInfo");
+    // console.log(findResData);
+
+    const resData = findResData.card.card.gridElements.infoWithStyle.restaurants
+    // console.log(resData);
+
+    setListOfRestro(resData) 
+    setAllRestro(resData)
     
   }
-  
+
+  const handleClick = () => {
+    // console.log("button clicked ");
+    // console.log(listOfRestro);
+    
+    const topRated = allResto.filter((data) => (
+      data.info.avgRating >4.3
+    ))
+    // console.log(topRated);
+    
+    setListOfRestro(topRated)
+    
+  }
+
+  const handleClear = () => {
+    setListOfRestro(allResto)
+  }
+
+  const handleChange = () => {
+    
+  }
+    
+ if (listOfRestro.length === 0) {
+   return (
+     <div className="shimmer-container">
+       {shimmerArray.map((_, index) => (
+         <ShimmerUi key={index} />
+       ))}
+     </div>
+   );
+ }
   return (
-    <div className="res-body">
-      <div className="search-btn">
-        <input type="text" />
-        <button>search</button>
-        <button className='filter-btn'
-          onClick={() => {
-            const filetrBtn = restaurantList.filter((res) => (
-            res?.info?.avgRating > 4.2
-            ))
-            setRestaurantList(filetrBtn)
-        }}
-        >Top rated Restro</button>
+    <div className="body">
+      <div className="btns">
+        <div className="search-btn">
+          <input type="text"
+            value={value}
+            onChange={handleChange}
+
+          />
+          <button>search</button>
+        </div>
+        <button onClick={handleClick}>Top Restro</button>
+        <button onClick={handleClear}>Clear</button>
       </div>
-      <div className="res">
-        {
-          restaurantList.map((resData) => (
-            <RestaurantCrad key={resData.info.id} resData={ resData.info} />
-          ))
-        }
+      <div className="res-card">
+        {listOfRestro.map((resObj) => (
+          <RestaurantCard key={resObj.info.id} resData={ resObj} />
+        ))}
       </div>
     </div>
-  )
+  );
 }
 
 export default Body
